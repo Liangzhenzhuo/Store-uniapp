@@ -32,7 +32,11 @@
 				</swiper-item>
 			</swiper>
 			
-			<view class="popular">
+			<thematic-swiper title="最受欢迎" :swiperList="mostPopularList | arrayChunk" @click="thematicClick"></thematic-swiper>
+			
+			<thematic-swiper title="发现" moreText="更多" :swiperList="discoverList | arrayChunk" @click="thematicClick"></thematic-swiper>
+			
+			<!-- <view class="popular">
 				<view class="popular-title">
 					<view class="popular-title-text">
 						最受欢迎
@@ -42,12 +46,16 @@
 						<uni-icons type="forward" color="#FA995E"></uni-icons>
 					</view>
 				</view>
-				<view class="popular-list">
-					<view class="popular-list-item" v-for="(row, index) in mostPopularList" :key="index">
-						<image :src="row.pic" mode="aspectFill"></image>
-					</view>
-				</view>
-			</view>
+				<swiper circular :duration="200" autoplay>
+					<swiper-item v-for="(row, index) in mostPopularListFormat" :key="index">
+						<view class="popular-list">
+							<view class="popular-list-item" v-for="(row2, index2) in row" :key="index2">
+								<image :src="row2.pic" mode="aspectFill"></image>
+							</view>
+						</view>
+					</swiper-item>
+				</swiper>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -55,11 +63,14 @@
 <script>
 	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
+	import thematicSwiper from './components/thematic-swiper.vue'
+	import { chunk } from '@/common/util.js'
 
 	export default {
 		components: {
 			uniNavBar,
-			uniIcons
+			uniIcons,
+			thematicSwiper
 		},
 		data() {
 			return {
@@ -96,8 +107,47 @@
 					},
 					{
 						pic: '/static/images/most-popular/3.png'
+					},
+					{
+						pic: '/static/images/most-popular/4.png'
+					},
+					{
+						pic: '/static/images/most-popular/5.png'
+					},
+					{
+						pic: '/static/images/most-popular/5.png'
+					}
+				],
+				discoverList: [
+					{
+						pic: '/static/images/discover/1.jpg'
+					},
+					{
+						pic: '/static/images/discover/2.jpg'
+					},
+					{
+						pic: '/static/images/discover/3.jpg'
+					},
+					{
+						pic: '/static/images/discover/4.jpg'
+					},
+					{
+						pic: '/static/images/discover/5.jpg'
+					},
+					{
+						pic: '/static/images/discover/6.jpg'
 					}
 				]
+			}
+		},
+		computed: {
+			mostPopularListFormat() {
+				return chunk(this.mostPopularList, 3)
+			}
+		},
+		filters: {
+			arrayChunk(arr) {
+				return chunk(arr, 3)
 			}
 		},
 		onLoad() {
@@ -110,6 +160,9 @@
 				}else {
 					uni.showToast({ title: id.toString() });
 				}
+			},
+			thematicClick(event) {
+				console.log(event);
 			}
 		}
 	}
@@ -236,54 +289,54 @@
 			}
 		}
 		
-		.popular {
-			width: 100%;
-			height: 262rpx;
-			display: flex;
-			flex-direction: column;
+		// .popular {
+		// 	width: 100%;
+		// 	height: 262rpx;
+		// 	display: flex;
+		// 	flex-direction: column;
 			
 			
-			&-title {
-				margin-bottom: 40rpx;
-				height: 40rpx;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
+		// 	&-title {
+		// 		margin-bottom: 40rpx;
+		// 		height: 40rpx;
+		// 		display: flex;
+		// 		align-items: center;
+		// 		justify-content: space-between;
 				
-				&-text {
-					font-size: 32rpx;
-					font-weight: 400;
-				}
+		// 		&-text {
+		// 			font-size: 32rpx;
+		// 			font-weight: 400;
+		// 		}
 				
-				&-more {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					font-size: 32rpx;
-					font-weight: 400;
-					color: #FA995E;
-				}
-			}
+		// 		&-more {
+		// 			display: flex;
+		// 			align-items: center;
+		// 			justify-content: center;
+		// 			font-size: 32rpx;
+		// 			font-weight: 400;
+		// 			color: #FA995E;
+		// 		}
+		// 	}
 			
-			&-list {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
+		// 	&-list {
+		// 		display: flex;
+		// 		align-items: center;
+		// 		justify-content: space-between;
 				
-				&-item {
-					background-color: #fdfdfd;
-					border: 1px solid #d8d8d8;
-					width: 180rpx;
-					height: 180rpx;
-					border-radius: 14rpx;
+		// 		&-item {
+		// 			background-color: #fdfdfd;
+		// 			border: 1px solid #d8d8d8;
+		// 			width: 180rpx;
+		// 			height: 180rpx;
+		// 			border-radius: 14rpx;
 					
-					image {
-						width: 100%;
-						height: 100%;
-						border-radius: 14rpx;
-					}
-				}
-			}
-		}
+		// 			image {
+		// 				width: 100%;
+		// 				height: 100%;
+		// 				border-radius: 14rpx;
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}
 </style>
