@@ -1,0 +1,76 @@
+<template>
+	<view class="tabbar">
+		<view class="tabbar-item" v-for="(item, index) in tabbarList" :key="index" @tap="tabbarItemClick(index)">
+			<view class="tabbar-item-pic" :class="index === curr ? 'active' : ''">
+				<image :src="index === curr ? item.selectedIconPath : item.iconPath" mode=""></image>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		props: {
+			tabbarList: {
+				type: Array,
+				default() {
+					return []
+				}
+			},
+			curr: {
+				type: Number,
+				default() {
+					return 0
+				}
+			}
+		},
+		methods: {
+			tabbarItemClick(i) {
+				this.$emit('tabClick', { tabIndex: i })
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	.tabbar {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 108rpx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		z-index: 1;
+		background-color: #FFF;
+		border-top-left-radius: 48rpx;
+		border-top-right-radius: 48rpx;
+		box-shadow: 0px -5px 8px rgba(142,149,255,0.03);
+		
+		&-item {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			
+			&-pic {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 80rpx;
+				height: 80rpx;
+				
+				image {
+					width: 48rpx;
+					height: 48rpx;
+				}
+			}
+		}
+		
+		.active {
+			border-radius: 50%;
+			background: rgba(94,95,250,0.1);
+		}
+	}
+</style>

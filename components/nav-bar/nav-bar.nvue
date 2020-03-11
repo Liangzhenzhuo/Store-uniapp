@@ -1,0 +1,31 @@
+<template>
+	<uni-nav-bar :title="title" fixed status-bar :shadow="false" :border="false" color="#0A0157" :leftIcon="leftIcon" backgroundColor="#f9f9ff"></uni-nav-bar>
+</template>
+
+<script>
+	import { uniNavBar } from '@/components/uni'
+	
+	export default {
+		components: {
+			uniNavBar
+		},
+		props: {
+			title: {
+				type: String,
+				default() {
+					return 'hubjoy'
+				}
+			},
+			leftIcon: {
+				type: String,
+				default() {
+					return 'bars'
+				}
+			}
+		}
+	}
+</script>
+
+<style>
+
+</style>

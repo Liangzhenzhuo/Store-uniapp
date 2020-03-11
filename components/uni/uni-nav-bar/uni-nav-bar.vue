@@ -41,8 +41,8 @@
 </template>
 
 <script>
-	import uniStatusBar from "../uni-status-bar/uni-status-bar.vue";
-	import uniIcons from "../uni-icons/uni-icons.vue";
+	import uniStatusBar from "@/components/uni"
+	import uniIcons from "@/components/uni"
 
 	export default {
 		name: "UniNavBar",

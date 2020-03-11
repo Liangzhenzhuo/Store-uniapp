@@ -1,6 +1,7 @@
 <template>
 	<view class="page">
-		<uni-nav-bar title="hubjoy" fixed status-bar :shadow="false" :border="false" color="#0A0157" leftIcon="bars"></uni-nav-bar>
+		<tabbar @tabClick="tabClick" :tabbarList="tabbarList"></tabbar>
+		<nav-bar></nav-bar>
 		<view class="page-wrap">
 			<view class="search-bar">
 				<svg width="16px" height="16px" viewBox="0 0 14 14" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
@@ -52,21 +53,36 @@
 </template>
 
 <script>
-	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
-	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	import thematicSwiper from './components/thematic-swiper.vue'
+	import navBar from '@/components/nav-bar/nav-bar.nvue'
 	import { chunk } from '@/common/util.js'
 
 	export default {
 		components: {
-			uniNavBar,
-			uniIcons,
+			navBar,
 			thematicSwiper
 		},
 		data() {
 			return {
 				searchText: '',
 				currentSwiperIndex: 0,
+				tabbarList: [
+					{
+						iconPath: '/static/images/tabbar/home.png',
+						selectedIconPath: '/static/images/tabbar/home-active.png',
+						path: '/pages/index/index'
+					},
+					{
+						iconPath: '/static/images/tabbar/heart.png',
+						selectedIconPath: '/static/images/tabbar/heart-active.png',
+						path: '/pages/test/test'
+					},
+					{
+						iconPath: '/static/images/tabbar/trophy.png',
+						selectedIconPath: '/static/images/tabbar/trophy-active.png',
+						path: '/pages/test/test2'
+					}
+				],
 				swiperList: [{
 						title: 'Nike React Vision',
 						content: 'Nike React Vision 男子运动鞋演绎非凡舒适体验',
@@ -159,9 +175,6 @@
 				return chunk(arr, 3)
 			}
 		},
-		onLoad() {
-
-		},
 		methods: {
 			swiperTap(id, type) {
 				if (type === 'buy') {
@@ -171,10 +184,22 @@
 				}
 			},
 			thematicMoreClick(event) {
-				console.log(event);
+				if (event.title === '最受欢迎') {
+					uni.navigateTo({
+						url: '/pages/goods/goods'
+					});
+				}
 			},
 			thematicItemClick(event) {
 				console.log(event);
+			},
+			tabClick(event) {
+				const path = this.tabbarList[event.tabIndex].path,
+							currPagePath = '/' + this.$route.meta.pagePath
+				if (path === currPagePath) return
+				uni.navigateTo({
+					url: path
+				})
 			}
 		}
 	}
@@ -182,8 +207,10 @@
 
 <style lang="scss">
 	.page {
+		background-color: #f9f9ff;
+		
 		&-wrap {
-			padding: 30rpx 60rpx;
+			padding: 30rpx 60rpx 108rpx 60rpx;
 		}
 
 		.search-bar {

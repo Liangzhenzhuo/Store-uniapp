@@ -1,0 +1,24 @@
+<template>
+	<view>
+		<nav-bar title="Nike" leftIcon="arrowleft"></nav-bar>
+	</view>
+</template>
+
+<script>
+	import navBar from '@/components/nav-bar/nav-bar.nvue'
+	
+	export default {
+		components: {
+			navBar
+		},
+		data() {
+			return {
+				
+			};
+		}
+	}
+</script>
+
+<style lang="scss">
+
+</style>
