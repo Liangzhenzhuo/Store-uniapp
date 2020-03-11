@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/test/test"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#FAFAFF",
+    "backgroundColor": "#FAFAFF"
+  },
+  "nvue": {
+    "pages": {
+      "pages/goods/goods.html": {
+        "window": {
+          "usingComponents": {},
+          "navigationStyle": "custom"
+        },
+        "nvue": true
+      }
+    }
+  },
+  "nvueCompiler": "uni-app",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "store",
+  "compilerVersion": "2.4.6",
+  "usingComponents": {
+    "tabbar": "/components/tabbar/tabbar"
+  }
+}

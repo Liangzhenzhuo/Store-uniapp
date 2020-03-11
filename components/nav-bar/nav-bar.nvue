@@ -1,10 +1,13 @@
 <template>
-	<uni-nav-bar :title="title" fixed status-bar :shadow="false" :border="false" color="#0A0157" :leftIcon="leftIcon" backgroundColor="#f9f9ff"></uni-nav-bar>
+	<uni-nav-bar :title="title" :padding="padding" fixed status-bar :shadow="false" :border="false" color="#0A0157" :leftIcon="leftIcon"
+	 backgroundColor="#f9f9ff" @clickLeft="clickLeft"></uni-nav-bar>
 </template>
 
 <script>
-	import { uniNavBar } from '@/components/uni'
-	
+	import {
+		uniNavBar
+	} from '../uni'
+
 	export default {
 		components: {
 			uniNavBar
@@ -12,15 +15,26 @@
 		props: {
 			title: {
 				type: String,
-				default() {
+				default () {
 					return 'hubjoy'
 				}
 			},
 			leftIcon: {
 				type: String,
-				default() {
+				default () {
 					return 'bars'
 				}
+			},
+			padding: {
+				type: Number,
+				default () {
+					return 60
+				}
+			}
+		},
+		methods: {
+			clickLeft() {
+				this.$emit('clickLeft')
 			}
 		}
 	}

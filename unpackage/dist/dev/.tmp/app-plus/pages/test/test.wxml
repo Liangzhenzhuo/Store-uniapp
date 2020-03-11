@@ -1,0 +1,1 @@
+<view><tabbar vue-id="1" tabbarList="{{tabbarList}}" curr="{{1}}" data-event-opts="{{[['^tabClick',[['tabClick']]]]}}" bind:tabClick="__e" bind:__l="__l"></tabbar></view>

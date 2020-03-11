@@ -23,6 +23,8 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#FAFAFF",
-		"backgroundColor": "#FAFAFF"
+		"backgroundColorTop": "#FAFAFF",
+		"backgroundColorBottom": "#FAFAFF",
+		"backgroundColor":"#FAFAFF"
 	}
 }

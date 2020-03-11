@@ -1,0 +1,1 @@
+<view class="tabbar"><block wx:for="{{tabbarList}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['tabbarItemClick',[index]]]]]}}" class="tabbar-item" bindtap="__e"><view class="{{['tabbar-item-pic',index===curr?'active':'']}}"><image src="{{index===curr?item.selectedIconPath:item.iconPath}}" mode></image></view></view></block></view>

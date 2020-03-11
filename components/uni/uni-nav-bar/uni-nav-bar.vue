@@ -3,7 +3,7 @@
 		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }" :style="{ 'background-color': backgroundColor }"
 		 class="uni-navbar__content">
 			<uni-status-bar v-if="statusBar" />
-			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
+			<view :style="{ color: color,backgroundColor: backgroundColor, paddingLeft: padding + 'rpx', paddingRight: padding + 'rpx' }" class="uni-navbar__header uni-navbar__content_view">
 				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="leftIcon.length">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
@@ -41,8 +41,8 @@
 </template>
 
 <script>
-	import uniStatusBar from "@/components/uni"
-	import uniIcons from "@/components/uni"
+	import uniStatusBar from "../uni-status-bar/uni-status-bar.vue"
+	import uniIcons from "../uni-icons/uni-icons.vue"
 
 	export default {
 		name: "UniNavBar",
@@ -54,6 +54,10 @@
 			title: {
 				type: String,
 				default: ""
+			},
+			padding: {
+				type: Number,
+				default: 0
 			},
 			leftText: {
 				type: String,
@@ -155,6 +159,7 @@
 		height: $nav-height;
 		line-height: $nav-height;
 		font-size: 16px;
+		box-sizing: border-box;
 		// background-color: #ffffff;
 	}
 

@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tabbar": "/components/tabbar/tabbar",
+    "nav-bar": "/components/nav-bar/nav-bar",
+    "thematic-swiper": "/pages/index/components/thematic-swiper",
+    "uni-icons": "/components/uni/index"
+  }
+}

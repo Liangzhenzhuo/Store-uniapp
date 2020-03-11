@@ -22,7 +22,12 @@
 </template>
 
 <script>
+	import { uniIcons } from '@/components/uni'
+	
 	export default {
+		components: {
+			uniIcons
+		},
 		props: {
 			title: {
 				type: String,

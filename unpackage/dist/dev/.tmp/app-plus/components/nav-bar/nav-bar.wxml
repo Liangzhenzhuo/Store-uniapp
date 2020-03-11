@@ -1,0 +1,1 @@
+<uni-nav-bar vue-id="1" title="{{title}}" padding="{{60}}" fixed status-bar shadow="{{false}}" border="{{false}}" color="#0A0157" leftIcon="{{leftIcon}}" backgroundColor="#f9f9ff" data-event-opts="{{[['^clickLeft',[['clickLeft']]]]}}" bind:clickLeft="__e" bind:__l="__l"></uni-nav-bar>
