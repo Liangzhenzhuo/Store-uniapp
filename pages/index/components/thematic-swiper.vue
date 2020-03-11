@@ -74,6 +74,7 @@
 			&-text {
 				font-size: 32rpx;
 				font-weight: 400;
+				color: #0a0157;
 			}
 			
 			&-more {

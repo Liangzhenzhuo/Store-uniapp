@@ -32,6 +32,17 @@
 				</swiper-item>
 			</swiper>
 			
+			<view class="category">
+				<view class="category-item" v-for="(item, index) in categoriesList" :key="index">
+					<view class="category-item-pic">
+						<image :src="item.pic" mode=""></image>
+					</view>
+					<view class="category-item-title">
+						{{item.title}}
+					</view>
+				</view>
+			</view>
+			
 			<thematic-swiper title="最受欢迎" :swiperList="mostPopularList | arrayChunk" @moreClick="thematicMoreClick" @itemClick="thematicItemClick"></thematic-swiper>
 			
 			<thematic-swiper title="发现" moreText="更多" :swiperList="discoverList | arrayChunk" @moreClick="thematicMoreClick" @itemClick="thematicItemClick"></thematic-swiper>
@@ -116,6 +127,24 @@
 					},
 					{
 						pic: '/static/images/discover/6.jpg'
+					}
+				],
+				categoriesList: [
+					{
+						title: '数码3C',
+						pic: '/static/images/category/mobiles.png'
+					},
+					{
+						title: '全球购',
+						pic: '/static/images/category/earth.png'
+					},
+					{
+						title: '时尚',
+						pic: '/static/images/category/fashion.png'
+					},
+					{
+						title: '家电',
+						pic: '/static/images/category/jiadian.png'
 					}
 				]
 			}
@@ -268,6 +297,40 @@
 							content: none;
 						}
 					}
+				}
+			}
+		}
+		
+		.category {
+			margin-bottom: 70rpx;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			
+			&-item {
+				&-pic {
+					margin-bottom: 20rpx;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 100rpx;
+					height: 100rpx;
+					background: rgba(94,95,250,0.1);
+					border-radius: 50%;
+					
+					image {
+						width: 42rpx;
+						height: 42rpx;
+					}
+				}
+				
+				&-title {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 24rpx;
+					font-weight: 400;
+					color: #0a0157;
 				}
 			}
 		}
