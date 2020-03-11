@@ -13,7 +13,7 @@
 			<swiper-item v-for="(row, index) in swiperList" :key="index">
 				<view class="thematic-list">
 					<view class="thematic-list-item" v-for="(row2, index2) in row" :key="index2">
-						<image :src="row2.pic" mode="aspectFill"></image>
+						<image :src="row2.pic" mode="aspectFill" @tap="listItemClick(index, index2)"></image>
 					</view>
 				</view>
 			</swiper-item>
@@ -45,7 +45,11 @@
 		},
 		methods: {
 			moreClick() {
-				this.$emit('click', { title: this.title })
+				this.$emit('moreClick', { title: this.title })
+			},
+			listItemClick(index1, index2) {
+				const title = this.title
+				this.$emit('itemClick', { title, index1, index2 })
 			}
 		}
 	}

@@ -32,30 +32,10 @@
 				</swiper-item>
 			</swiper>
 			
-			<thematic-swiper title="最受欢迎" :swiperList="mostPopularList | arrayChunk" @click="thematicClick"></thematic-swiper>
+			<thematic-swiper title="最受欢迎" :swiperList="mostPopularList | arrayChunk" @moreClick="thematicMoreClick" @itemClick="thematicItemClick"></thematic-swiper>
 			
-			<thematic-swiper title="发现" moreText="更多" :swiperList="discoverList | arrayChunk" @click="thematicClick"></thematic-swiper>
+			<thematic-swiper title="发现" moreText="更多" :swiperList="discoverList | arrayChunk" @moreClick="thematicMoreClick" @itemClick="thematicItemClick"></thematic-swiper>
 			
-			<!-- <view class="popular">
-				<view class="popular-title">
-					<view class="popular-title-text">
-						最受欢迎
-					</view>
-					<view class="popular-title-more">
-						查看所有
-						<uni-icons type="forward" color="#FA995E"></uni-icons>
-					</view>
-				</view>
-				<swiper circular :duration="200" autoplay>
-					<swiper-item v-for="(row, index) in mostPopularListFormat" :key="index">
-						<view class="popular-list">
-							<view class="popular-list-item" v-for="(row2, index2) in row" :key="index2">
-								<image :src="row2.pic" mode="aspectFill"></image>
-							</view>
-						</view>
-					</swiper-item>
-				</swiper>
-			</view> -->
 		</view>
 	</view>
 </template>
@@ -161,7 +141,10 @@
 					uni.showToast({ title: id.toString() });
 				}
 			},
-			thematicClick(event) {
+			thematicMoreClick(event) {
+				console.log(event);
+			},
+			thematicItemClick(event) {
 				console.log(event);
 			}
 		}
@@ -288,55 +271,5 @@
 				}
 			}
 		}
-		
-		// .popular {
-		// 	width: 100%;
-		// 	height: 262rpx;
-		// 	display: flex;
-		// 	flex-direction: column;
-			
-			
-		// 	&-title {
-		// 		margin-bottom: 40rpx;
-		// 		height: 40rpx;
-		// 		display: flex;
-		// 		align-items: center;
-		// 		justify-content: space-between;
-				
-		// 		&-text {
-		// 			font-size: 32rpx;
-		// 			font-weight: 400;
-		// 		}
-				
-		// 		&-more {
-		// 			display: flex;
-		// 			align-items: center;
-		// 			justify-content: center;
-		// 			font-size: 32rpx;
-		// 			font-weight: 400;
-		// 			color: #FA995E;
-		// 		}
-		// 	}
-			
-		// 	&-list {
-		// 		display: flex;
-		// 		align-items: center;
-		// 		justify-content: space-between;
-				
-		// 		&-item {
-		// 			background-color: #fdfdfd;
-		// 			border: 1px solid #d8d8d8;
-		// 			width: 180rpx;
-		// 			height: 180rpx;
-		// 			border-radius: 14rpx;
-					
-		// 			image {
-		// 				width: 100%;
-		// 				height: 100%;
-		// 				border-radius: 14rpx;
-		// 			}
-		// 		}
-		// 	}
-		// }
 	}
 </style>
