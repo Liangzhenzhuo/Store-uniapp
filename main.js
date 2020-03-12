@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-import tabbar from './components/tabbar/tabbar.nvue'
+import tabbar from './components/tabbar/tabbar.vue'
 import { http } from './common/requests/index.js'
 
 Vue.config.productionTip = false

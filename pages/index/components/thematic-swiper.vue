@@ -73,6 +73,7 @@
 			margin-bottom: 40rpx;
 			height: 40rpx;
 			display: flex;
+			flex-direction: row;
 			align-items: center;
 			justify-content: space-between;
 			
@@ -84,6 +85,7 @@
 			
 			&-more {
 				display: flex;
+				flex-direction: row;
 				align-items: center;
 				justify-content: center;
 				font-size: 32rpx;
@@ -94,6 +96,7 @@
 		
 		&-list {
 			display: flex;
+			flex-direction: row;
 			align-items: center;
 			justify-content: space-between;
 			
