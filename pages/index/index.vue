@@ -15,7 +15,8 @@
 				<input class="search-bar-text" type="text" :value.trim="searchText" placeholder="搜索" placeholder-class="search-bar-text-placeholder"
 				 maxlength="25" />
 			</view>
-			<swiper :current="currentSwiperIndex" duration="200" class="swiper" circular previous-margin="45rpx" next-margin="45rpx">
+			<swiper :current="currentSwiperIndex" duration="200" class="swiper" circular previous-margin="45rpx" next-margin="45rpx"
+			 v-if="swiperList">
 				<swiper-item v-for="row in swiperList" @tap="swiperTap(row.id)" :key="row.id">
 					<view class="swiper-item" :class="'swiper-item-' + row.style">
 						<view class="swiper-item-pic">
@@ -33,7 +34,7 @@
 					</view>
 				</swiper-item>
 			</swiper>
-			
+
 			<view class="category">
 				<view class="category-item" v-for="(item, index) in categoriesList" :key="index">
 					<view class="category-item-pic">
@@ -44,11 +45,12 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<thematic-swiper title="最受欢迎" :swiperList="mostPopularList | arrayChunk" @moreClick="thematicMoreClick" @itemClick="thematicItemClick"></thematic-swiper>
-			
-			<thematic-swiper title="发现" moreText="更多" :swiperList="discoverList | arrayChunk" @moreClick="thematicMoreClick" @itemClick="thematicItemClick"></thematic-swiper>
-			
+
+			<thematic-swiper title="发现" moreText="更多" :swiperList="discoverList | arrayChunk" @moreClick="thematicMoreClick"
+			 @itemClick="thematicItemClick"></thematic-swiper>
+
 		</view>
 	</view>
 </template>
@@ -56,8 +58,12 @@
 <script>
 	import thematicSwiper from './components/thematic-swiper.vue'
 	import navBar from '@/components/nav-bar/nav-bar.nvue'
-	import { chunk } from '@/common/util.js'
-	import { uniIcons } from '@/components/uni'
+	import {
+		chunk
+	} from '@/common/util.js'
+	import {
+		uniIcons
+	} from '@/components/uni'
 
 	export default {
 		components: {
@@ -69,85 +75,25 @@
 			return {
 				searchText: '',
 				currentSwiperIndex: 0,
-				swiperList: [{
-						title: 'Nike React Vision',
-						content: '男子运动鞋演绎非凡舒适体验',
-						id: 1,
-						style: 'oringe',
-						pic: '/static/images/goods/Nike React Vision/Nike React Vision 1.jpg'
+				swiperList: [],
+				mostPopularList: [],
+				discoverList: [],
+				categoriesList: [{
+						'title': '数码3C',
+						'pic': '/static/images/category/mobiles.png'
 					},
 					{
-						title: 'Nike NSW React Vision',
-						content: '灵感来源于墨西哥民间艺术神话人物',
-						id: 2,
-						style: 'blue',
-						pic: '/static/images/goods/Nike NSW React Vision/Nike NSW React Vision 1.jpg'
+						'title': '全球购',
+						'pic': '/static/images/category/earth.png'
 					},
 					{
-						title: 'Jumpman Diamond Low PF',
-						content: '汀克·哈特菲尔德亲自设计',
-						id: 3,
-						style: 'red',
-						pic: '/static/images/goods/Jumpman Diamond Low PF/Jumpman Diamond Low PF 1.jpg'
-					}
-				],
-				mostPopularList: [
-					{
-						pic: '/static/images/most-popular/1.png'
+						'title': '时尚',
+						'pic': '/static/images/category/fashion.png'
 					},
 					{
-						pic: '/static/images/most-popular/2.png'
+						'title': '家电',
+						'pic': '/static/images/category/jiadian.png'
 					},
-					{
-						pic: '/static/images/most-popular/3.png'
-					},
-					{
-						pic: '/static/images/most-popular/4.png'
-					},
-					{
-						pic: '/static/images/most-popular/5.png'
-					},
-					{
-						pic: '/static/images/most-popular/5.png'
-					}
-				],
-				discoverList: [
-					{
-						pic: '/static/images/discover/1.jpg'
-					},
-					{
-						pic: '/static/images/discover/2.jpg'
-					},
-					{
-						pic: '/static/images/discover/3.jpg'
-					},
-					{
-						pic: '/static/images/discover/4.jpg'
-					},
-					{
-						pic: '/static/images/discover/5.jpg'
-					},
-					{
-						pic: '/static/images/discover/6.jpg'
-					}
-				],
-				categoriesList: [
-					{
-						title: '数码3C',
-						pic: '/static/images/category/mobiles.png'
-					},
-					{
-						title: '全球购',
-						pic: '/static/images/category/earth.png'
-					},
-					{
-						title: '时尚',
-						pic: '/static/images/category/fashion.png'
-					},
-					{
-						title: '家电',
-						pic: '/static/images/category/jiadian.png'
-					}
 				]
 			}
 		},
@@ -161,12 +107,27 @@
 				return chunk(arr, 3)
 			}
 		},
+		onLoad() {
+			this.init()
+		},
 		methods: {
+			async init() {
+				const swiper = await this.$http.post('/getSwiper'),
+					popular = await this.$http.post('/getPopular'),
+					discover = await this.$http.post('/getDiscover')
+				this.swiperList = swiper.data
+				this.mostPopularList = popular.data
+				this.discoverList = discover.data
+			},
 			swiperTap(id, type) {
 				if (type === 'buy') {
-					uni.showToast({ title: 'buy' + id.toString() });
-				}else {
-					uni.showToast({ title: id.toString() });
+					uni.showToast({
+						title: 'buy' + id.toString()
+					});
+				} else {
+					uni.showToast({
+						title: id.toString()
+					});
 				}
 			},
 			thematicMoreClick(event) {
@@ -184,7 +145,7 @@
 			},
 			tabClick(event) {
 				const path = this.tabbarList[event.tabIndex].path,
-							currPagePath = '/' + this.$route.meta.pagePath
+					currPagePath = '/' + this.$route.meta.pagePath
 				if (path === currPagePath) return
 				uni.navigateTo({
 					url: path
@@ -197,7 +158,7 @@
 <style lang="scss">
 	.page {
 		background-color: #f9f9ff;
-		
+
 		&-wrap {
 			padding: 30rpx 60rpx 108rpx 60rpx;
 		}
@@ -310,7 +271,7 @@
 						border: 1px solid #FFF;
 						box-sizing: initial;
 						border-radius: 100px;
-						
+
 						&::after {
 							content: none;
 						}
@@ -318,13 +279,13 @@
 				}
 			}
 		}
-		
+
 		.category {
 			margin-bottom: 70rpx;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			
+
 			&-item {
 				&-pic {
 					margin-bottom: 20rpx;
@@ -333,15 +294,15 @@
 					justify-content: center;
 					width: 100rpx;
 					height: 100rpx;
-					background: rgba(94,95,250,0.1);
+					background: rgba(94, 95, 250, 0.1);
 					border-radius: 50%;
-					
+
 					image {
 						width: 42rpx;
 						height: 42rpx;
 					}
 				}
-				
+
 				&-title {
 					display: flex;
 					align-items: center;

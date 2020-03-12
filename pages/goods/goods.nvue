@@ -39,44 +39,7 @@
 		},
 		data() {
 			return {
-				goodsList: [
-					{
-						title: 'Jumpman Diamond Low PF',
-						pic: '/static/images/goods/Jumpman Diamond Low PF/Jumpman Diamond Low PF 1.jpg',
-						price: 300,
-						originPrice: 720
-					},
-					{
-						title: 'Nike NSW React Vision',
-						pic: '/static/images/goods/Nike NSW React Vision/Nike NSW React Vision 1.jpg',
-						price: 200,
-						originPrice: 650
-					},
-					{
-						title: 'Nike React Vision',
-						pic: '/static/images/goods/Nike React Vision/Nike React Vision 1.jpg',
-						price: 700,
-						originPrice: 1300
-					},
-					{
-						title: 'Jumpman Diamond Low PF',
-						pic: '/static/images/goods/Jumpman Diamond Low PF/Jumpman Diamond Low PF 1.jpg',
-						price: 300,
-						originPrice: 720
-					},
-					{
-						title: 'Nike NSW React Vision',
-						pic: '/static/images/goods/Nike NSW React Vision/Nike NSW React Vision 1.jpg',
-						price: 200,
-						originPrice: 650
-					},
-					{
-						title: 'Nike React Vision',
-						pic: '/static/images/goods/Nike React Vision/Nike React Vision 1.jpg',
-						price: 700,
-						originPrice: 1300
-					}
-				]
+				goodsList: []
 			};
 		},
 		filters: {
@@ -84,7 +47,14 @@
 				return '￥' + val
 			}
 		},
+		onLoad() {
+			this.init()
+		},
 		methods: {
+			async init() {
+				const goods = await this.$http.post('/getGoods')
+				this.goodsList = [...goods.data, ...goods.data]
+			},
 			back(e) {
 				uni.navigateBack()
 			},
